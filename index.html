@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vesper Visible</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="wrap" style="padding-top:60px;padding-bottom:70px">
+
+  <header style="text-align:center;margin-bottom:50px">
+    <p style="font-family:var(--font-display);letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;color:var(--accent);margin:0 0 10px">🦇 Vesper Lab</p>
+    <h1 style="font-size:2.3rem;margin:0 0 16px">Vesper Visible</h1>
+    <p style="color:var(--text-muted);max-width:640px;margin:0 auto;font-size:1.02rem">
+      The same landing page, built twice. One version treats accessibility as an
+      afterthought — the other builds it in from the start. Same layout, same
+      content, same look at a glance. Only the markup underneath is different,
+      and that's exactly what changes everything for someone using a keyboard,
+      a screen reader, or a Vesper Toolkit bookmarklet.
+    </p>
+  </header>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-bottom:56px">
+    <div class="card" style="border-color:var(--coral-700)">
+      <h2 style="margin:0 0 8px;font-size:1.2rem;color:var(--coral-300)">Inaccessible version</h2>
+      <p style="color:var(--text-muted);margin:0 0 18px">Div-buttons, missing labels, broken heading order, a positive tabindex trap, low-contrast text, a fixed-width table. Nine deliberate barriers, one per common issue.</p>
+      <a class="btn" href="inaccessible.html" style="background:var(--coral-700);border-color:var(--coral-700)">Open the inaccessible version</a>
+    </div>
+    <div class="card" style="border-color:var(--accent)">
+      <h2 style="margin:0 0 8px;font-size:1.2rem;color:var(--accent)">Accessible version</h2>
+      <p style="color:var(--text-muted);margin:0 0 18px">The exact same page, corrected point by point. Real buttons, real labels, a sound heading order, sufficient contrast, a table that reflows.</p>
+      <a class="btn" href="accessible.html">Open the accessible version</a>
+    </div>
+  </div>
+
+  <section style="margin-bottom:44px">
+    <h2 style="font-size:1.3rem;margin:0 0 14px">How to use this</h2>
+    <ul style="color:var(--text-muted);line-height:1.8;padding-left:22px;margin:0">
+      <li>Put your mouse away and tab through both pages with the keyboard alone. Notice where the focus goes missing, or where it jumps somewhere unexpected.</li>
+      <li>Turn on a screen reader (VoiceOver, NVDA, TalkBack) and listen to both. This is the comparison point that's usually missing: the same content, sounding completely different depending on the markup.</li>
+      <li>Run any <a href="https://toolkit.vesperlab.dev/">🦇 Vesper Toolkit</a> bookmarklet on both — Headings, Tab Order, ARIA Reader, Contrast, Link/Image/Label Scan, or a full AC Scan. Compare what each one reports.</li>
+      <li>Then open "view source" (or your browser's dev tools). Every deliberate issue has a comment right above it explaining what's wrong and why — and the accessible version has the matching comment explaining the fix.</li>
+    </ul>
+  </section>
+
+  <p style="text-align:center">
+    <a href="https://toolkit.vesperlab.dev/" style="color:var(--text-muted);font-size:.88rem">← Back to Vesper Toolkit</a>
+  </p>
+
+</div>
+
+</body>
+</html>

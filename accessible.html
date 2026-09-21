@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!-- ✓ lang="en" set explicitly: a screen reader now knows which language
+     rules to apply to this content. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loremcorp — Accessible version</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="explainer">
+  <div class="wrap">
+    <span><strong>🦇 Vesper Visible</strong> — this is the accessible version of the same page. View source to see what changed, and why.</span>
+    <a href="inaccessible.html">Compare with the inaccessible version →</a>
+  </div>
+</div>
+
+<!-- ✓ Skip link: hidden until it receives focus, then it's the very first
+     thing a keyboard user tabs to. Jumps straight past the nav to #main. -->
+<a href="#main" style="position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-on);padding:10px 16px;border-radius:0 0 8px 0;font-weight:700;z-index:10" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Skip to main content</a>
+
+<!-- ✓ A real <nav> with an accessible name: a screen reader can jump
+     straight to it, identify it as navigation, and skip past it entirely
+     if it's not what they're looking for right now. -->
+<div class="site-header">
+  <div class="wrap">
+    <!-- ✓ The brand mark is a real link: focusable, has an accessible name
+         from its text, and Enter activates it — no JS click handler needed. -->
+    <a class="brand" href="index.html">Loremcorp</a>
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="#services">Services</a></li>
+        <!-- ✓ Each link's accessible name now says what it leads to, so
+             they're distinguishable even out of visual context. -->
+        <li><a href="#faq">Frequently asked questions</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap" id="main">
+
+  <!-- ✓ A real <h1>, first heading on the page: "jump to heading"
+       navigation in a screen reader now has somewhere to start. -->
+  <section class="hero">
+    <h1 style="margin:0 0 14px">Lorem ipsum dolor sit amet</h1>
+    <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>
+    <!-- ✓ A real <button>: focusable, has an accessible name from its own
+         text content, and both Enter and Space activate it natively. -->
+    <button type="button" class="btn" onclick="alert('Lorem ipsum!')" style="margin-top:10px">Get Started</button>
+  </section>
+
+  <!-- ✓ Heading levels now step down one at a time: h1 → h2 → h3, a real
+       hierarchy instead of a skip. -->
+  <section id="services" class="cards">
+    <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Our services</h2>
+    <div class="card">
+      <!-- ✓ Purely decorative image: alt="" tells assistive tech to skip it
+           instead of announcing a meaningless description. -->
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%235A7D46'/%3E%3C/svg%3E" alt="">
+      <h3>Consulting</h3>
+      <p>Lorem ipsum dolor sit amet consectetur.</p>
+    </div>
+    <div class="card">
+      <!-- ✓ This image is meaningful, so it gets a short, real alt
+           describing what it conveys. -->
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23A6CA93'/%3E%3C/svg%3E" alt="Abstract sage-green pattern representing the Design service">
+      <h3>Design</h3>
+      <p>Sed do eiusmod tempor incididunt ut labore.</p>
+    </div>
+    <div class="card">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23C6B2ED'/%3E%3C/svg%3E" alt="Abstract lavender pattern representing the Support service">
+      <h3>Support</h3>
+      <p>Ut enim ad minim veniam quis nostrud.</p>
+    </div>
+  </section>
+
+  <section class="testimonial">
+    <blockquote>
+      <!-- ✓ Same visual spot, a color with a ~7:1 contrast ratio against
+           its background — comfortably above the 4.5:1 minimum for normal
+           text at criterion 1.4.3. -->
+      <p class="contrast-ok">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error."</p>
+      <cite>— A. Client, Loremcorp customer</cite>
+    </blockquote>
+  </section>
+
+  <!-- ✓ A real disclosure widget: <details>/<summary> is focusable, has a
+       built-in accessible name and expanded/collapsed state, and opens with
+       the keyboard alone (Enter or Space) — no JS required for any of it. -->
+  <section class="faq" id="faq">
+    <h2>Frequently asked questions</h2>
+    <details class="faq-item">
+      <summary>What is Lorem Ipsum?</summary>
+      <div class="faq-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Why do we use it?</summary>
+      <div class="faq-body">Because it has a more-or-less normal distribution of letters, as opposed to "Content here" text.</div>
+    </details>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact us</h2>
+    <p class="intro">Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+    <form onsubmit="alert('Sent!'); return false;">
+      <div class="field">
+        <!-- ✓ A real <label for="name">, programmatically tied to the
+             field: it stays visible, and a screen reader announces it as
+             this field's name regardless of what's been typed. -->
+        <label for="name">Your name</label>
+        <input type="text" id="name">
+      </div>
+      <div class="field">
+        <!-- ✓ `for="email"` now matches the input's id: clicking the label
+             focuses the field, and it's announced as the field's name. -->
+        <label for="email">Email <span class="required-mark" aria-hidden="true">*</span><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"> (required)</span></label>
+        <input type="email" id="email" required aria-required="true">
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" rows="4"></textarea>
+      </div>
+      <!-- ✓ A real <button type="submit">: pressing Enter in any field now
+           submits the form, exactly as expected, no JS click handler
+           standing in for it. -->
+      <button type="submit" class="btn">Send message</button>
+    </form>
+  </section>
+
+  <section style="padding-bottom:50px">
+    <h2>Plans</h2>
+    <!-- ✓ The table's container is fluid instead of a fixed 720px: it
+         shrinks with the viewport, so nothing forces horizontal scroll on
+         the page itself at 320px (criterion 1.4.10). -->
+    <div class="plans-fluid" style="overflow-x:auto">
+      <table>
+        <tr><th>Plan</th><th>Price</th><th>Includes</th></tr>
+        <tr><td>Basic</td><td>$0</td><td>Lorem ipsum dolor sit amet</td></tr>
+        <tr><td>Pro</td><td>$19</td><td>Consectetur adipiscing elit sed</td></tr>
+        <tr><td>Team</td><td>$49</td><td>Do eiusmod tempor incididunt ut</td></tr>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <ul class="footer-links">
+      <li><a href="#services">Our services</a></li>
+      <li><a href="#faq">Frequently asked questions</a></li>
+    </ul>
+    <!-- ✓ aria-label gives this icon-only button an accessible name: a
+         screen reader now announces "Back to top, button" instead of just
+         "button". -->
+    <button class="icon-btn" onclick="window.scrollTo(0,0)" aria-label="Back to top">↑</button>
+  </div>
+</footer>
+
+<!-- ✓ No positive-tabindex trap here: every focusable element follows the
+     page's natural DOM order, which matches its visual order too. -->
+
+</body>
+</html>

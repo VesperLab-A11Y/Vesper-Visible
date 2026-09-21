@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!-- ⚠ No `lang` attribute on <html>. A screen reader has no way to know which
+     pronunciation and hyphenation rules to use, and will often default to the
+     system language regardless of the page's actual content. Fix: lang="en". -->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loremcorp — Inaccessible version</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="explainer">
+  <div class="wrap">
+    <span><strong>🦇 Vesper Visible</strong> — this is the inaccessible version of the same page. View source to see why each part fails, and what to do instead.</span>
+    <a href="accessible.html">Compare with the accessible version →</a>
+  </div>
+</div>
+
+<!-- ⚠ No skip link. On a real page with a nav this long, a keyboard user has
+     to tab through every link, every time, before reaching the main content.
+     Fix: a visually-hidden "Skip to main content" link, first in the body,
+     that becomes visible on focus and jumps to #main. -->
+
+<!-- ⚠ Plain <div> instead of <nav>. It's not exposed as a "navigation" landmark,
+     so a screen reader user can't jump straight to it, or skip past it, the
+     way they can with a real landmark. Fix: <nav aria-label="Main">. -->
+<div class="site-header">
+  <div class="wrap">
+    <!-- ⚠ The brand mark is a <span>, not a link, even though clicking it
+         navigates. It has no accessible name as an interactive control and
+         is not reachable by keyboard. Fix: a real <a href="index.html">. -->
+    <span class="brand" onclick="location.href='index.html'" style="cursor:pointer">Loremcorp</span>
+    <ul class="nav-list">
+      <li><a href="#services">Services</a></li>
+      <!-- ⚠ Three "Learn more" links with identical text pointing to three
+           different destinations. Out of context (a screen reader's "list of
+           links" view, for instance) they're indistinguishable. Fix: give
+           each link an accessible name that includes what it leads to. -->
+      <li><a href="#services">Learn more</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ⚠ No <h1> anywhere on the page, and this heading-styled text is a
+       <div>, not a heading element at all. A screen reader's "jump to
+       heading" navigation finds nothing here. Fix: a real <h1>. -->
+  <section class="hero">
+    <div style="font-family:var(--font-display);font-size:2.4rem;font-weight:600;margin:0 0 14px">Lorem ipsum dolor sit amet</div>
+    <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>
+    <!-- ⚠ A clickable <div> standing in for a button: no accessible role, no
+         accessible name from a widget's perspective, not in the tab order,
+         and Enter/Space do nothing. A mouse is required. Fix: a real
+         <button> or <a>, which get all of this for free. -->
+    <div class="btn" onclick="alert('Lorem ipsum!')" style="margin-top:10px">Get Started</div>
+  </section>
+
+  <!-- ⚠ Heading level skips straight from nothing to <h3>, with no <h2> in
+       between. The outline no longer describes a real hierarchy. Fix: a
+       proper h1 → h2 → h3 chain, one level at a time. -->
+  <section id="services" class="cards">
+    <div class="card">
+      <!-- ⚠ Purely decorative image carries alt text anyway, which a screen
+           reader will read aloud for no reason. Fix: alt="" (empty, not
+           missing) so it's skipped. -->
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%235A7D46'/%3E%3C/svg%3E" alt="decorative flourish graphic">
+      <h3>Consulting</h3>
+      <p>Lorem ipsum dolor sit amet consectetur.</p>
+    </div>
+    <div class="card">
+      <!-- ⚠ This icon-style image is meaningful (it's the only visual cue
+           for what the card is about) but has no alt text at all — most
+           screen readers will fall back to reading the file name.
+           Fix: a short, real alt describing what it conveys. -->
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23A6CA93'/%3E%3C/svg%3E">
+      <h3>Design</h3>
+      <p>Sed do eiusmod tempor incididunt ut labore.</p>
+    </div>
+    <div class="card">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23C6B2ED'/%3E%3C/svg%3E" alt="image">
+      <!-- ⚠ alt="image" is technically present but conveys nothing — it's
+           the accessibility equivalent of no alt text at all. -->
+      <h3>Support</h3>
+      <p>Ut enim ad minim veniam quis nostrud.</p>
+    </div>
+  </section>
+
+  <section class="testimonial">
+    <blockquote>
+      <!-- ⚠ ~2.3:1 contrast ratio for normal-size text (needs 4.5:1). Reads
+           fine to most sighted users on a bright screen, fails for a lot of
+           people in bright sunlight, with low vision, or on a dim laptop
+           panel. Fix: a lighter, higher-contrast color for this text size. -->
+      <p class="contrast-fail">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error."</p>
+      <cite>— A. Client, Loremcorp customer</cite>
+    </blockquote>
+  </section>
+
+  <!-- ⚠ Accordion built from <div>s with onclick: not a real disclosure
+       widget. No aria-expanded to announce open/closed state, and the
+       header isn't focusable, so a keyboard user can't operate it at all.
+       Fix: <details><summary>, which gets all of this natively. -->
+  <section class="faq">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <div class="faux-summary" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block'">
+        What is Lorem Ipsum? <span aria-hidden="true">+</span>
+      </div>
+      <div class="faq-body" style="display:none">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faux-summary" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block'">
+        Why do we use it? <span aria-hidden="true">+</span>
+      </div>
+      <div class="faq-body" style="display:none">Because it has a more-or-less normal distribution of letters, as opposed to "Content here" text.</div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact us</h2>
+    <p class="intro">Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
+    <form onsubmit="alert('Sent!'); return false;">
+      <div class="field">
+        <!-- ⚠ No <label> at all — the placeholder disappears the moment
+             someone starts typing, and it was never programmatically
+             associated with the field to begin with. Fix: a real <label
+             for="name">. -->
+        <input type="text" id="name" placeholder="Your name">
+      </div>
+      <div class="field">
+        <!-- ⚠ A <label> exists, but has no `for` attribute matching the
+             input's id, so clicking it does nothing and a screen reader
+             won't announce it as this field's name. They just happen to
+             sit next to each other visually. -->
+        <label>Email <span class="required-mark">*</span></label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" rows="4"></textarea>
+      </div>
+      <!-- ⚠ Same issue as the hero CTA: a styled <div>, not a <button
+           type="submit">. The form can't even be submitted with the
+           keyboard's Enter key from within the fields. -->
+      <div class="btn" onclick="document.querySelector('form').requestSubmit ? document.querySelector('form').requestSubmit() : alert('Sent!')">Send message</div>
+    </form>
+  </section>
+
+  <section style="padding-bottom:50px">
+    <h2>Plans</h2>
+    <!-- ⚠ Fixed 720px-wide table with no responsive handling. Below that
+         width the page gains horizontal scroll — try this at 320px with the
+         Vesper Toolkit's Reflow bookmarklet. Fix: let it shrink, or make it
+         scrollable in its own container instead of the whole page. -->
+    <div class="plans-fixed">
+      <table>
+        <tr><th>Plan</th><th>Price</th><th>Includes</th></tr>
+        <tr><td>Basic</td><td>$0</td><td>Lorem ipsum dolor sit amet</td></tr>
+        <tr><td>Pro</td><td>$19</td><td>Consectetur adipiscing elit sed</td></tr>
+        <tr><td>Team</td><td>$49</td><td>Do eiusmod tempor incididunt ut</td></tr>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <ul class="footer-links">
+      <li><a href="#services">Learn more</a></li>
+      <li><a href="#faq">Learn more</a></li>
+    </ul>
+    <!-- ⚠ Icon-only button with no accessible name at all — a screen reader
+         announces it as just "button". Fix: aria-label="Back to top". -->
+    <button class="icon-btn" onclick="window.scrollTo(0,0)">↑</button>
+  </div>
+</footer>
+
+<!-- ⚠ A decorative element with a *positive* tabindex, tucked away here so
+     it's easy to miss visually. Positive tabindex values force this element
+     into the keyboard tab order ahead of everything else on the page,
+     regardless of where it sits visually or in the DOM — a classic trap.
+     Try the Tab Order bookmarklet and watch where element #1 lands.
+     Fix: remove it, or use tabindex="0" if it truly needs to be focusable. -->
+<span tabindex="1" style="position:absolute;left:-9999px">Hidden focus trap</span>
+
+</body>
+</html>

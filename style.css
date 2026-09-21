@@ -1,0 +1,154 @@
+/* Vesper Visible — feuille de style partagée entre les 3 pages du site.
+   Jetons V2 recopiés tels quels depuis vesper-toolkit/index.html (jamais régénérés). */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Mono:wght@400;500&display=swap');
+
+/* ---- Typographie ---- */
+:root{
+  --font-display:'Noto Serif',Georgia,'Times New Roman',serif;
+  --font-body:'Noto Sans',Arial,Helvetica,sans-serif;
+  --font-mono:'Noto Sans Mono','Courier New',monospace;
+}
+
+/* ---- Couleurs ---- */
+:root{
+  --ink-975:oklch(0.11 0.006 150);
+  --ink-950:oklch(0.145 0.008 150);
+  --ink-900:oklch(0.195 0.01 150);
+  --ink-800:oklch(0.235 0.012 150);
+  --ink-700:oklch(0.30 0.014 150);
+  --cream-100:oklch(0.93 0.018 85);
+  --cream-300:oklch(0.85 0.018 85);
+  --cream-500:oklch(0.72 0.02 85);
+  --cream-700:oklch(0.66 0.02 85);
+  --hairline:rgba(233,223,200,0.14);
+  --hairline-strong:rgba(233,223,200,0.18);
+
+  --sage-300:oklch(0.89 0.05 128);
+  --sage-500:oklch(0.83 0.055 128);
+  --sage-700:oklch(0.66 0.055 128);
+  --sage-900:oklch(0.44 0.05 128);
+  --sage-on:oklch(0.145 0.008 150);
+
+  --coral-300:#F0A9A2;
+  --coral-700:#A05C57;
+
+  --surface-page:var(--ink-975);
+  --surface-card:var(--ink-900);
+  --surface-input:var(--ink-800);
+  --surface-raised:var(--ink-700);
+  --text-body:var(--cream-100);
+  --text-secondary:var(--cream-300);
+  --text-muted:var(--cream-500);
+  --border-default:var(--hairline);
+  --border-strong:var(--hairline-strong);
+  --accent:var(--sage-500);
+  --accent-hover:var(--sage-300);
+  --accent-on:var(--sage-on);
+  --focus-ring:var(--sage-500);
+  --link:var(--sage-500);
+  --danger:var(--coral-700);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; border-radius: 3px; }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.25; }
+a { color: var(--link); }
+
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+/* Bandeau explicatif : présent en haut des deux versions, jamais du Lorem Ipsum. */
+.explainer {
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--border-default);
+  padding: 14px 20px;
+  font-size: .92rem;
+}
+.explainer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.explainer strong { color: var(--accent); }
+.explainer a { color: var(--text-body); text-decoration: underline; text-underline-offset: 3px; }
+
+/* En-tête / nav du site fictif */
+.site-header { padding: 20px 0; border-bottom: 1px solid var(--border-default); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.brand { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--text-body); text-decoration: none; }
+.nav-list { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+.nav-list a { text-decoration: none; color: var(--text-secondary); font-weight: 600; font-size: .92rem; }
+.nav-list a:hover { color: var(--accent); }
+
+/* Hero */
+.hero { padding: 64px 0 48px; text-align: center; }
+.hero h1 { font-size: 2.4rem; margin: 0 0 14px; }
+.hero p { color: var(--text-muted); max-width: 560px; margin: 0 auto 26px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font: 700 .92rem/1 var(--font-body);
+  padding: 13px 22px; border-radius: 8px;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--accent-on);
+  text-decoration: none; cursor: pointer;
+}
+.btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+/* Cartes / grille de services */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: 40px 0; }
+.card { background: var(--surface-card); border: 1px solid var(--border-default); border-radius: 12px; padding: 20px; }
+.card img { border-radius: 8px; margin-bottom: 14px; aspect-ratio: 16/10; object-fit: cover; background: var(--surface-input); }
+.card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+.card p { color: var(--text-muted); font-size: .9rem; margin: 0; }
+
+/* Témoignage (sert de bloc à contraste volontairement testé) */
+.testimonial { padding: 30px 0; }
+.testimonial blockquote { margin: 0; padding: 24px; border-radius: 12px; background: var(--surface-card); font-size: 1.05rem; }
+.testimonial cite { display: block; margin-top: 10px; font-style: normal; font-size: .85rem; }
+.contrast-fail { color: #4a4a4a; background: var(--surface-card); }
+.contrast-ok { color: var(--text-secondary); }
+
+/* FAQ / accordéon */
+.faq { padding: 30px 0 50px; }
+.faq h2 { margin-bottom: 18px; }
+.faq-item { border: 1px solid var(--border-default); border-radius: 10px; margin-bottom: 10px; background: var(--surface-card); overflow: hidden; }
+.faq-item > summary,
+.faq-item .faux-summary {
+  cursor: pointer; padding: 14px 16px; font-weight: 700; list-style: none;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item .faq-body { padding: 0 16px 16px; color: var(--text-muted); font-size: .92rem; }
+
+/* Formulaire de contact */
+.contact { padding: 20px 0 60px; }
+.contact h2 { margin-bottom: 6px; }
+.contact .intro { color: var(--text-muted); margin: 0 0 22px; }
+.field { margin-bottom: 16px; max-width: 420px; }
+.field label { display: block; margin-bottom: 6px; font-size: .88rem; font-weight: 700; }
+.field input, .field textarea {
+  width: 100%; background: var(--surface-input); border: 1px solid var(--border-strong);
+  border-radius: 8px; padding: 10px 12px; color: var(--text-body); font: inherit;
+}
+.field .hint { font-size: .8rem; color: var(--text-muted); margin-top: 4px; }
+.required-mark { color: var(--danger); }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--border-default); padding: 26px 0 40px; }
+.site-footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-links { display: flex; gap: 16px; list-style: none; margin: 0; padding: 0; }
+.footer-links a { color: var(--text-muted); font-size: .85rem; text-decoration: none; }
+.icon-btn {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border-strong);
+  background: transparent; color: var(--text-body); display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+
+/* Table de comparaison plan tarifaire — sert de test reflow (largeur fixe volontaire côté inaccessible) */
+.plans-fixed { width: 720px; }
+.plans-fluid { width: 100%; }
+table { border-collapse: collapse; }
+th, td { border: 1px solid var(--border-default); padding: 10px 14px; text-align: left; font-size: .88rem; }
+th { background: var(--surface-card); }
