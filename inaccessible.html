@@ -31,8 +31,8 @@
 
 <div class="explainer">
   <div class="wrap">
-    <span><strong>🦇 Vesper Visible</strong>: this is the inaccessible version of the same page. View source to see why each part fails, and what to do instead.</span>
-    <a href="accessible.html">Compare with the accessible version →</a>
+    <span data-i18n-html="explainerText"><strong>🦇 Vesper Visible</strong>: this is the inaccessible version of the same page. View source to see why each part fails, and what to do instead.</span>
+    <a href="accessible.html" data-i18n="explainerLink">Compare with the accessible version →</a>
   </div>
 </div>
 
@@ -267,6 +267,39 @@
      Try the Tab Order bookmarklet and watch where element #1 lands.
      Fix: remove it, or use tabindex="0" if it truly needs to be focusable. -->
 <span tabindex="1" style="position:absolute;left:-9999px">Hidden focus trap</span>
+
+<script>
+(function () {
+  'use strict';
+  // Traduit uniquement l'encart d'en-tête : le reste de la page (Loremcorp,
+  // les 16 défauts) reste en anglais, c'est le contenu de démonstration.
+  // Langue reprise de la préférence choisie sur index.html (même clé
+  // localStorage), avec ?lang= en priorité pour un lien direct.
+  var dict = {
+    en: {
+      explainerText: '<strong>🦇 Vesper Visible</strong>: this is the inaccessible version of the same page. View source to see why each part fails, and what to do instead.',
+      explainerLink: 'Compare with the accessible version →'
+    },
+    fr: {
+      explainerText: '<strong>🦇 Vesper Visible</strong> : voici la version inaccessible de la même page. Affiche le code source pour voir pourquoi chaque partie échoue, et ce qu\'il faut faire à la place.',
+      explainerLink: 'Comparer avec la version accessible →'
+    }
+  };
+  var urlMatch = /[?&]lang=(fr|en)\b/.exec(location.search);
+  var lang = (urlMatch && urlMatch[1]) ||
+    (function () { try { return localStorage.getItem('vesperlab-visible:lang'); } catch (e) { return null; } })() ||
+    ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en');
+  var d = dict[lang] || dict.en;
+  document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+    var v = d[el.getAttribute('data-i18n-html')];
+    if (v != null) el.innerHTML = v;
+  });
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var v = d[el.getAttribute('data-i18n')];
+    if (v != null) el.textContent = v;
+  });
+})();
+</script>
 
 </body>
 </html>

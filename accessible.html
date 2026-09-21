@@ -18,20 +18,20 @@
 
 <div class="explainer" role="region" aria-label="About this demo">
   <div class="wrap">
-    <span><strong>🦇 Vesper Visible</strong>: this is the accessible version of the same page. View source to see what changed, and why.</span>
-    <a href="inaccessible.html">Compare with the inaccessible version →</a>
+    <span data-i18n-html="explainerText"><strong>🦇 Vesper Visible</strong>: this is the accessible version of the same page. View source to see what changed, and why.</span>
+    <a href="inaccessible.html" data-i18n="explainerLink">Compare with the inaccessible version →</a>
   </div>
 </div>
 
 <div class="wrap" style="padding-top:16px">
   <details class="faq-item">
     <summary>
-      <span>I ran a scan and got an axe-core error on this page. Why?</span>
+      <span data-i18n="axeSummary">I ran a scan and got an axe-core error on this page. Why?</span>
       <svg class="vl-toggle-icon" width="16" height="16" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" focusable="false"><path d="M256,5.333C114.88,5.333,0,117.76,0,256s114.88,250.667,256,250.667S512,394.24,512,256S397.12,5.333,256,5.333z M256,485.333C126.613,485.333,21.333,382.4,21.333,256S126.613,26.667,256,26.667S490.667,129.493,490.667,256 S385.387,485.333,256,485.333z"/><path d="M401.6,178.453c-4.8-3.733-11.52-3.093-15.253,1.493L256,340.373L125.653,179.947c-3.733-4.587-10.453-5.227-15.04-1.493 s-5.227,10.453-1.493,15.04L247.787,364.16c3.733,4.587,10.453,5.227,15.04,1.6c0.533-0.427,1.067-0.96,1.6-1.6l138.667-170.667 C406.827,188.907,406.08,182.187,401.6,178.453z"/></svg>
     </summary>
     <div class="faq-body">
-      <p style="margin:8px 0">You probably found the "All page content should be contained by landmarks" (<code>region</code>) flag on the disclaimer line right below the nav. It's real: that line genuinely sits outside every landmark on this page. But look up its details and you'll find it tagged <code>best-practice</code>, not a numbered WCAG success criterion. axe-core ships two kinds of rules side by side, in the same report, with the same red styling: rules that map to a WCAG failure, and rules that check organizational best practices with no direct WCAG mapping. This page passes every WCAG-mapped rule. That one best-practice flag is real, and worth knowing about, but it's not the same thing as an accessibility barrier for an actual person: the text is static, always visible, and equally readable to everyone regardless of which landmark contains it.</p>
-      <p style="margin:8px 0">The lesson generalizes past this one rule: a scanner result is a starting point, not a verdict. Some flags need a fix. Some need five seconds of judgment to confirm they're fine as-is. Knowing which is which is the actual skill, and a scan can't do that part for you.</p>
+      <p style="margin:8px 0" data-i18n-html="axeP1">You probably found the "All page content should be contained by landmarks" (<code>region</code>) flag on the disclaimer line right below the nav. It's real: that line genuinely sits outside every landmark on this page. But look up its details and you'll find it tagged <code>best-practice</code>, not a numbered WCAG success criterion. axe-core ships two kinds of rules side by side, in the same report, with the same red styling: rules that map to a WCAG failure, and rules that check organizational best practices with no direct WCAG mapping. This page passes every WCAG-mapped rule. That one best-practice flag is real, and worth knowing about, but it's not the same thing as an accessibility barrier for an actual person: the text is static, always visible, and equally readable to everyone regardless of which landmark contains it.</p>
+      <p style="margin:8px 0" data-i18n="axeP2">The lesson generalizes past this one rule: a scanner result is a starting point, not a verdict. Some flags need a fix. Some need five seconds of judgment to confirm they're fine as-is. Knowing which is which is the actual skill, and a scan can't do that part for you.</p>
     </div>
   </details>
 </div>
@@ -270,6 +270,45 @@
 
 <!-- ✓ No positive-tabindex trap here: every focusable element follows the
      page's natural DOM order, which matches its visual order too. -->
+
+<script>
+(function () {
+  'use strict';
+  // Traduit l'encart d'en-tête et l'encart axe-core seulement : le reste de
+  // la page (Loremcorp, les 16 corrections) reste en anglais, c'est le
+  // contenu de démonstration. Langue reprise de la préférence choisie sur
+  // index.html (même clé localStorage), avec ?lang= en priorité pour un lien direct.
+  var dict = {
+    en: {
+      explainerText: '<strong>🦇 Vesper Visible</strong>: this is the accessible version of the same page. View source to see what changed, and why.',
+      explainerLink: 'Compare with the inaccessible version →',
+      axeSummary: 'I ran a scan and got an axe-core error on this page. Why?',
+      axeP1: 'You probably found the "All page content should be contained by landmarks" (<code>region</code>) flag on the disclaimer line right below the nav. It\'s real: that line genuinely sits outside every landmark on this page. But look up its details and you\'ll find it tagged <code>best-practice</code>, not a numbered WCAG success criterion. axe-core ships two kinds of rules side by side, in the same report, with the same red styling: rules that map to a WCAG failure, and rules that check organizational best practices with no direct WCAG mapping. This page passes every WCAG-mapped rule. That one best-practice flag is real, and worth knowing about, but it\'s not the same thing as an accessibility barrier for an actual person: the text is static, always visible, and equally readable to everyone regardless of which landmark contains it.',
+      axeP2: 'The lesson generalizes past this one rule: a scanner result is a starting point, not a verdict. Some flags need a fix. Some need five seconds of judgment to confirm they\'re fine as-is. Knowing which is which is the actual skill, and a scan can\'t do that part for you.'
+    },
+    fr: {
+      explainerText: '<strong>🦇 Vesper Visible</strong> : voici la version accessible de la même page. Affiche le code source pour voir ce qui a changé, et pourquoi.',
+      explainerLink: 'Comparer avec la version inaccessible →',
+      axeSummary: 'J\'ai un résultat axe-core sur cette page. Pourquoi ?',
+      axeP1: 'Tu as sans doute trouvé le signalement « All page content should be contained by landmarks » (règle <code>region</code>) sur la ligne de mention légale juste sous la nav. C\'est réel : cette ligne se trouve bel et bien hors de tout landmark sur cette page. Mais regarde les détails de la règle : elle est taguée <code>best-practice</code>, pas un critère WCAG numéroté. axe-core regroupe deux types de règles côte à côte, dans le même rapport, avec le même style rouge : les règles qui correspondent à un vrai échec WCAG, et celles qui vérifient des bonnes pratiques d\'organisation sans correspondance WCAG directe. Cette page passe toutes les règles liées à un critère WCAG. Ce signalement best-practice est réel, et bon à savoir, mais ce n\'est pas la même chose qu\'une barrière d\'accessibilité pour une vraie personne : ce texte est statique, toujours visible, et aussi lisible pour tout le monde peu importe le landmark qui le contient.',
+      axeP2: 'La leçon dépasse cette règle précise : un résultat de scan est un point de départ, pas un verdict. Certains signalements ont besoin d\'un correctif. D\'autres ont besoin de cinq secondes de jugement pour confirmer qu\'ils sont déjà corrects. Savoir distinguer les deux, c\'est ça la vraie compétence, et un scan ne peut pas faire cette partie à ta place.'
+    }
+  };
+  var urlMatch = /[?&]lang=(fr|en)\b/.exec(location.search);
+  var lang = (urlMatch && urlMatch[1]) ||
+    (function () { try { return localStorage.getItem('vesperlab-visible:lang'); } catch (e) { return null; } })() ||
+    ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en');
+  var d = dict[lang] || dict.en;
+  document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+    var v = d[el.getAttribute('data-i18n-html')];
+    if (v != null) el.innerHTML = v;
+  });
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var v = d[el.getAttribute('data-i18n')];
+    if (v != null) el.textContent = v;
+  });
+})();
+</script>
 
 </body>
 </html>
