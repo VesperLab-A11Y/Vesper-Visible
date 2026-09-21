@@ -111,6 +111,16 @@ a { color: var(--link); }
 .contrast-fail { color: #4a4a4a; background: var(--surface-card); }
 .contrast-ok { color: var(--text-secondary); }
 
+/* Bascule de langue */
+summary::-webkit-details-marker { display: none; }
+.lang-toggle-btn {
+  background: transparent; border: 1px solid var(--border-strong); color: var(--text-muted);
+  border-radius: 20px; padding: 6px 16px; font: 700 .8rem/1 var(--font-body); cursor: pointer;
+}
+.lang-toggle-btn:hover { color: var(--text-body); border-color: var(--accent); }
+.vl-toggle-icon { transition: transform .15s ease; flex: none; }
+details[open] > summary .vl-toggle-icon { transform: rotate(180deg); }
+
 /* FAQ / accordéon */
 .faq { padding: 30px 0 50px; }
 .faq h2 { margin-bottom: 18px; }

@@ -9,48 +9,174 @@
 </head>
 <body>
 
-<div class="wrap" style="padding-top:60px;padding-bottom:70px">
+<div class="wrap" style="padding-top:30px;padding-bottom:70px">
+
+  <div style="display:flex;justify-content:flex-end;margin-bottom:20px">
+    <button type="button" id="lang-toggle" class="lang-toggle-btn">Français</button>
+  </div>
 
   <header style="text-align:center;margin-bottom:50px">
     <p style="font-family:var(--font-display);letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;color:var(--accent);margin:0 0 10px">🦇 Vesper Lab</p>
     <h1 style="font-size:2.3rem;margin:0 0 16px">Vesper Visible</h1>
-    <p style="color:var(--text-muted);max-width:640px;margin:0 auto;font-size:1.02rem">
-      The same landing page, built twice. One version treats accessibility as an
-      afterthought — the other builds it in from the start. Same layout, same
-      content, same look at a glance. Only the markup underneath is different,
-      and that's exactly what changes everything for someone using a keyboard,
-      a screen reader, or a Vesper Toolkit bookmarklet.
-    </p>
+    <p data-i18n="intro" style="color:var(--text-muted);max-width:640px;margin:0 auto;font-size:1.02rem"></p>
   </header>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-bottom:56px">
     <div class="card" style="border-color:var(--coral-700)">
-      <h2 style="margin:0 0 8px;font-size:1.2rem;color:var(--coral-300)">Inaccessible version</h2>
-      <p style="color:var(--text-muted);margin:0 0 18px">Div-buttons, missing labels, broken heading order, a positive tabindex trap, low-contrast text, a fixed-width table. Nine deliberate barriers, one per common issue.</p>
-      <a class="btn" href="inaccessible.html" style="background:var(--coral-700);border-color:var(--coral-700)">Open the inaccessible version</a>
+      <h2 data-i18n="card1Title" style="margin:0 0 8px;font-size:1.2rem;color:var(--coral-300)"></h2>
+      <p data-i18n="card1Desc" style="color:var(--text-muted);margin:0 0 18px"></p>
+      <a data-i18n="card1Btn" class="btn" href="inaccessible.html" style="background:var(--coral-700);border-color:var(--coral-700)"></a>
     </div>
     <div class="card" style="border-color:var(--accent)">
-      <h2 style="margin:0 0 8px;font-size:1.2rem;color:var(--accent)">Accessible version</h2>
-      <p style="color:var(--text-muted);margin:0 0 18px">The exact same page, corrected point by point. Real buttons, real labels, a sound heading order, sufficient contrast, a table that reflows.</p>
-      <a class="btn" href="accessible.html">Open the accessible version</a>
+      <h2 data-i18n="card2Title" style="margin:0 0 8px;font-size:1.2rem;color:var(--accent)"></h2>
+      <p data-i18n="card2Desc" style="color:var(--text-muted);margin:0 0 18px"></p>
+      <a data-i18n="card2Btn" class="btn" href="accessible.html"></a>
     </div>
   </div>
 
   <section style="margin-bottom:44px">
-    <h2 style="font-size:1.3rem;margin:0 0 14px">How to use this</h2>
+    <h2 data-i18n="howToTitle" style="font-size:1.3rem;margin:0 0 14px"></h2>
     <ul style="color:var(--text-muted);line-height:1.8;padding-left:22px;margin:0">
-      <li>Put your mouse away and tab through both pages with the keyboard alone. Notice where the focus goes missing, or where it jumps somewhere unexpected.</li>
-      <li>Turn on a screen reader (VoiceOver, NVDA, TalkBack) and listen to both. This is the comparison point that's usually missing: the same content, sounding completely different depending on the markup.</li>
-      <li>Run any <a href="https://toolkit.vesperlab.dev/">🦇 Vesper Toolkit</a> bookmarklet on both — Headings, Tab Order, ARIA Reader, Contrast, Link/Image/Label Scan, or a full AC Scan. Compare what each one reports.</li>
-      <li>Then open "view source" (or your browser's dev tools). Every deliberate issue has a comment right above it explaining what's wrong and why — and the accessible version has the matching comment explaining the fix.</li>
+      <li data-i18n="how1"></li>
+      <li data-i18n="how2"></li>
+      <li data-i18n-html="how3"></li>
+      <li data-i18n-html="how4"></li>
     </ul>
   </section>
 
-  <p style="text-align:center">
-    <a href="https://toolkit.vesperlab.dev/" style="color:var(--text-muted);font-size:.88rem">← Back to Vesper Toolkit</a>
-  </p>
+  <section style="margin-bottom:20px;border:1px solid var(--border-default);border-radius:12px;background:var(--surface-card);padding:24px">
+    <h2 data-i18n="gameTitle" style="font-size:1.3rem;margin:0 0 10px"></h2>
+    <p data-i18n="gameIntro" style="color:var(--text-muted);margin:0 0 18px"></p>
+    <details class="faq-item" style="background:var(--surface-raised)">
+      <summary>
+        <span data-i18n="gameReveal"></span>
+        <svg class="vl-toggle-icon" width="16" height="16" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" focusable="false"><path d="M256,5.333C114.88,5.333,0,117.76,0,256s114.88,250.667,256,250.667S512,394.24,512,256S397.12,5.333,256,5.333z M256,485.333C126.613,485.333,21.333,382.4,21.333,256S126.613,26.667,256,26.667S490.667,129.493,490.667,256 S385.387,485.333,256,485.333z"/><path d="M401.6,178.453c-4.8-3.733-11.52-3.093-15.253,1.493L256,340.373L125.653,179.947c-3.733-4.587-10.453-5.227-15.04-1.493 s-5.227,10.453-1.493,15.04L247.787,364.16c3.733,4.587,10.453,5.227,15.04,1.6c0.533-0.427,1.067-0.96,1.6-1.6l138.667-170.667 C406.827,188.907,406.08,182.187,401.6,178.453z"/></svg>
+      </summary>
+      <div class="faq-body">
+        <ul id="game-answers" style="line-height:1.7;padding-left:20px;margin:10px 0 0"></ul>
+      </div>
+    </details>
+  </section>
 
 </div>
+
+<footer class="site-footer" style="max-width:1040px;margin:44px auto 0;padding:20px 20px 0;text-align:center;font-size:.78rem;color:var(--text-muted);border-top:1px solid var(--border-default);line-height:1.9">
+  <div><span data-i18n="footer1"></span> <a href="https://vesperlab.dev/" target="_blank" rel="noopener" style="color:var(--coral-300)">Vesper Lab</a></div>
+  <div><span data-i18n="footer2"></span> <a href="https://github.com/VesperLab-A11Y/Vesper-Visible" target="_blank" rel="noopener" style="color:var(--coral-300)">GitHub</a></div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var NS = 'vesperlab-visible:';
+  function lsGet(k) { try { return localStorage.getItem(NS + k); } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(NS + k, v); } catch (e) {} }
+
+  var I18N = {
+    en: {
+      intro: "The same landing page, built twice. One version treats accessibility as an afterthought. The other builds it in from the start. They look almost identical: same layout, same content. Only the markup underneath differs, and that's what a keyboard, a screen reader, or a Vesper Toolkit bookmarklet actually responds to.",
+      card1Title: "Inaccessible version",
+      card1Desc: "Div-buttons, missing labels, a broken heading order, a positive tabindex trap, low-contrast text, a fixed-width table: nine barriers, each one a different bookmarklet's target.",
+      card1Btn: "Open the inaccessible version",
+      card2Title: "Accessible version",
+      card2Desc: "The same page, corrected point by point: real buttons, real labels, a sound heading order, sufficient contrast, a table that reflows.",
+      card2Btn: "Open the accessible version",
+      howToTitle: "How to use this",
+      how1: "Put your mouse away and tab through both pages with the keyboard alone. Notice where focus goes missing, or where it jumps somewhere unexpected.",
+      how2: "Turn on a screen reader (VoiceOver, NVDA, TalkBack) and listen to both. This is the comparison point that's usually missing: the same content, sounding completely different depending on the markup.",
+      how3: 'Run any <a href="https://toolkit.vesperlab.dev/">🦇 Vesper Toolkit</a> bookmarklet on both: Headings, Tab Order, ARIA Reader, Contrast, Link/Image/Label Scan, or a full AC Scan. Compare what each one reports.',
+      how4: 'Then open "view source" (or your browser\'s dev tools). Every deliberate issue has a comment right above it explaining what\'s wrong and why, and the accessible version has the matching comment explaining the fix.',
+      gameTitle: "Spot the difference",
+      gameIntro: "Seven more accessibility errors are hidden across these two pages. None of them show up in an automated scan, not even axe-core, and not even a Vesper Toolkit bookmarklet. Finding them takes a keyboard, a screen reader, or a careful look. Try before you check the answers.",
+      gameReveal: "Reveal the answers",
+      gameAnswers: [
+        "Reading order doesn't match visual order: something positioned with CSS to appear on the right actually comes first in the code. A screen reader hits it before anything else, in a different order than what's on screen. Compare the Tab Order bookmarklet's numbering against what's visible on the page.",
+        "Color is the only signal: a required field marked in red with no text, icon, or asterisk to back it up. Someone who can't distinguish that shade of red has no way to know it's required. A grayscale filter exposes it in seconds.",
+        "Something moves on its own with no way to stop it: an auto-advancing carousel or a looping animation with no pause button. Ten seconds of watching the page catches it; scanning the markup won't.",
+        "A meaningful image is set as a CSS background instead of an &lt;img&gt;: no alt text mechanism can reach it, because there's nothing to attach one to. Turn off images in your browser and see what disappears.",
+        "A label says one thing, the control does another: an aria-label that doesn't match what actually happens when you activate it. Listen to what a screen reader announces, then test what the control does.",
+        "Focus is invisible: tabbing through the page moves focus somewhere with no visible outline or highlight. Tab through with your eyes on the screen, not the code, and you'll see exactly where it disappears.",
+        "Something only appears on hover: a submenu or tooltip a mouse can reveal but a keyboard can't. Unplug your mouse, or just leave it alone, and tab through instead."
+      ],
+      footer1: "Vesper Visible, built by",
+      footer2: "Open source on"
+    },
+    fr: {
+      intro: "La même page d'accueil, construite deux fois. Une version traite l'accessibilité comme un détail réglé après coup. L'autre la construit dès le départ. Elles se ressemblent presque à l'identique : même mise en page, même contenu. Seul le balisage change en dessous, et c'est exactement ce que perçoivent un clavier, un lecteur d'écran ou un bookmarklet du Vesper Toolkit.",
+      card1Title: "Version inaccessible",
+      card1Desc: "Des div-boutons, des champs sans étiquette, un ordre de titres cassé, un piège de tabindex positif, du texte à faible contraste, un tableau à largeur fixe : neuf barrières, chacune la cible d'un bookmarklet différent.",
+      card1Btn: "Ouvrir la version inaccessible",
+      card2Title: "Version accessible",
+      card2Desc: "La même page, corrigée point par point : de vrais boutons, de vraies étiquettes, un ordre de titres cohérent, un contraste suffisant, un tableau qui s'adapte.",
+      card2Btn: "Ouvrir la version accessible",
+      howToTitle: "Comment s'en servir",
+      how1: "Range ta souris et navigue les deux pages au clavier seulement. Remarque où le focus disparaît, ou atterrit ailleurs sans prévenir.",
+      how2: "Active un lecteur d'écran (VoiceOver, NVDA, TalkBack) et écoute les deux versions. C'est le point de comparaison qui manque d'habitude : le même contenu, qui sonne complètement différemment selon le balisage.",
+      how3: 'Lance n\'importe quel bookmarklet du <a href="https://toolkit.vesperlab.dev/">🦇 Vesper Toolkit</a> sur les deux : Headings, Tab Order, ARIA Reader, Contrast, Link/Image/Label Scan, ou un AC Scan complet. Compare ce que chacun rapporte.',
+      how4: 'Ouvre ensuite « Afficher le code source » (ou les outils de développement du navigateur). Chaque défaut volontaire a un commentaire juste au-dessus qui explique le problème et pourquoi, et la version accessible a le commentaire équivalent qui explique le correctif.',
+      gameTitle: "Le jeu des 7 différences",
+      gameIntro: "Sept autres erreurs d'accessibilité sont cachées sur ces deux pages. Aucune ne ressort d'un scan automatique, même pas axe-core, même pas un bookmarklet du Vesper Toolkit. Les trouver demande un clavier, un lecteur d'écran, ou un œil attentif. Essaie avant de regarder les réponses.",
+      gameReveal: "Voir les réponses",
+      gameAnswers: [
+        "L'ordre de lecture ne correspond pas à l'ordre visuel : un élément positionné en CSS pour apparaître à droite arrive en fait en premier dans le code. Un lecteur d'écran le rencontre avant tout le reste, dans un ordre différent de ce qui s'affiche. Compare la numérotation de Tab Order avec ce que tu vois.",
+        "La couleur est le seul indice : un champ obligatoire marqué en rouge, sans texte, ni icône, ni astérisque pour appuyer ça. Une personne qui ne distingue pas cette nuance de rouge n'a aucun moyen de savoir que le champ est obligatoire. Un filtre niveaux de gris la révèle en quelques secondes.",
+        "Quelque chose bouge tout seul, sans façon de l'arrêter : un carrousel qui défile automatiquement ou une animation en boucle sans bouton pause. Dix secondes à observer la page suffisent ; lire le code ne suffit pas.",
+        "Une image porteuse de sens est posée en fond CSS plutôt qu'en &lt;img&gt; : aucun mécanisme de texte alternatif ne peut l'atteindre, puisqu'il n'y a rien où l'accrocher. Désactive les images dans le navigateur et regarde ce qui disparaît.",
+        "Une étiquette dit une chose, le contrôle en fait une autre : un aria-label qui ne correspond pas à ce qui se passe réellement une fois activé. Écoute ce qu'un lecteur d'écran annonce, puis teste ce que le contrôle fait.",
+        "Le focus est invisible : la tabulation déplace le focus vers un endroit sans contour ni surbrillance visible. Suis le focus des yeux pendant la tabulation, pas dans le code, et tu verras exactement où il disparaît.",
+        "Quelque chose n'apparaît qu'au survol : un sous-menu ou une infobulle que la souris révèle mais que le clavier ne peut pas atteindre. Débranche la souris, ou n'y touche simplement pas, et navigue au clavier."
+      ],
+      footer1: "Vesper Visible, réalisé par",
+      footer2: "Code source ouvert sur"
+    }
+  };
+
+  function applyStaticI18n(dict) {
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var v = dict[el.getAttribute('data-i18n')];
+      if (v != null) el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+      var v = dict[el.getAttribute('data-i18n-html')];
+      if (v != null) el.innerHTML = v;
+    });
+  }
+
+  function renderAnswers(dict) {
+    var list = document.getElementById('game-answers');
+    list.innerHTML = '';
+    dict.gameAnswers.forEach(function (item) {
+      var li = document.createElement('li');
+      li.style.marginBottom = '10px';
+      li.innerHTML = item;
+      list.appendChild(li);
+    });
+  }
+
+  function setLang(lang) {
+    var dict = I18N[lang] || I18N.en;
+    document.documentElement.lang = lang;
+    applyStaticI18n(dict);
+    renderAnswers(dict);
+    var btn = document.getElementById('lang-toggle');
+    btn.textContent = lang === 'fr' ? 'English' : 'Français';
+    lsSet('lang', lang);
+  }
+
+  document.getElementById('lang-toggle').addEventListener('click', function () {
+    var next = document.documentElement.lang === 'fr' ? 'en' : 'fr';
+    setLang(next);
+  });
+
+  // ?lang=fr|en dans l'URL prime sur la préférence enregistrée : permet à un site tiers
+  // (le Toolkit, en anglais) de renvoyer directement vers la bonne langue sans surprise.
+  var urlMatch = /[?&]lang=(fr|en)\b/.exec(location.search);
+  var wantLang = (urlMatch && urlMatch[1]) || lsGet('lang') ||
+    ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en');
+  setLang(wantLang);
+})();
+</script>
 
 </body>
 </html>
