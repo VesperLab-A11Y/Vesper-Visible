@@ -9,12 +9,29 @@
 <title>Loremcorp — Inaccessible version</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="style.css">
+<style>
+  /* SPOT THE DIFFERENCE 6/7 — Focus is invisible.
+     This rule strips the outline this page would otherwise inherit from
+     style.css's default :focus-visible rule. Tabbing through the nav moves
+     focus somewhere with no visible indicator at all. Not caught by any
+     automated scan: axe-core checks that a focus style *can* apply, not
+     whether a human can actually see it once it does. */
+  .nav-list a:focus { outline: none; }
+  /* SPOT THE DIFFERENCE 7/7 — Hover-only reveal.
+     The dropdown below only opens on :hover. A mouse can trigger it; a
+     keyboard focusing the same link cannot. */
+  .nav-dropdown:hover .nav-submenu { display: block; }
+  /* SPOT THE DIFFERENCE 1/7 — Reading order doesn't match visual order.
+     This card is last in the markup (a screen reader reaches it last) but
+     CSS `order` pulls it to appear first on screen. */
+  .cards .card:nth-child(3) { order: -1; }
+</style>
 </head>
 <body>
 
 <div class="explainer">
   <div class="wrap">
-    <span><strong>🦇 Vesper Visible</strong> — this is the inaccessible version of the same page. View source to see why each part fails, and what to do instead.</span>
+    <span><strong>🦇 Vesper Visible</strong>: this is the inaccessible version of the same page. View source to see why each part fails, and what to do instead.</span>
     <a href="accessible.html">Compare with the accessible version →</a>
   </div>
 </div>
@@ -42,6 +59,17 @@
       <li><a href="#services">Learn more</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
+      <!-- ⚠ Spot the difference 7/7: this submenu only opens on :hover (see
+           the <style> block above). Tab to "Resources" and press nothing —
+           there is nothing you can press. The links inside are unreachable
+           by keyboard, even though they're perfectly visible to a mouse. -->
+      <li class="nav-dropdown">
+        <a href="#">Resources</a>
+        <div class="nav-submenu">
+          <a href="#">Guides</a>
+          <a href="#">Case studies</a>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
@@ -60,6 +88,27 @@
          <button> or <a>, which get all of this for free. -->
     <div class="btn" onclick="alert('Lorem ipsum!')" style="margin-top:10px">Get Started</div>
   </section>
+
+  <!-- ⚠ Spot the difference 3/7: this text rotates on its own, forever,
+       with no button to pause it. Nothing in the markup is "wrong" in a
+       way axe-core checks for — it only shows up if you watch the page for
+       a few seconds instead of reading the source. -->
+  <div class="ticker">
+    <span class="ticker-item is-active">Featured in Loremcorp Weekly</span>
+    <span class="ticker-item">1,200+ businesses onboarded</span>
+    <span class="ticker-item">Rated 4.8 by our (fictional) clients</span>
+  </div>
+  <script>
+    (function () {
+      var items = document.querySelectorAll('.ticker .ticker-item');
+      var i = 0;
+      setInterval(function () {
+        items[i].classList.remove('is-active');
+        i = (i + 1) % items.length;
+        items[i].classList.add('is-active');
+      }, 2200);
+    })();
+  </script>
 
   <!-- ⚠ Heading level skips straight from nothing to <h3>, with no <h2> in
        between. The outline no longer describes a real hierarchy. Fix: a
@@ -82,6 +131,10 @@
       <h3>Design</h3>
       <p>Sed do eiusmod tempor incididunt ut labore.</p>
     </div>
+    <!-- ⚠ Spot the difference 1/7: this card is last here in the markup —
+         a screen reader reaches "Support" last — but the <style> block in
+         <head> gives it `order: -1`, so sighted users see it first. Reading
+         order and visual order have quietly split apart. -->
     <div class="card">
       <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Crect width='320' height='200' fill='%23C6B2ED'/%3E%3C/svg%3E" alt="image">
       <!-- ⚠ alt="image" is technically present but conveys nothing — it's
@@ -90,6 +143,16 @@
       <p>Ut enim ad minim veniam quis nostrud.</p>
     </div>
   </section>
+
+  <!-- ⚠ Spot the difference 4/7: this badge is a meaningful image (it's
+       standing in for a real certification seal) set as a CSS background,
+       not an <img>. There is no element here an alt attribute could even
+       attach to — turning off images in the browser makes it vanish
+       without a trace, for sighted and screen-reader users alike. -->
+  <div class="cert-row">
+    <div class="cert-badge-bg"></div>
+    <span>Certified Loremcorp Partner since 2019</span>
+  </div>
 
   <section class="testimonial">
     <blockquote>
@@ -141,6 +204,13 @@
         <label>Email <span class="required-mark">*</span></label>
         <input type="email" id="email" required>
       </div>
+      <!-- ⚠ Spot the difference 2/7: red is the only signal that this field
+           is required — no asterisk, no "(required)" text, nothing an
+           assistive technology or a color-blind user can pick up on. -->
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" required style="border-color:#c0392b">
+      </div>
       <div class="field">
         <label for="message">Message</label>
         <textarea id="message" rows="4"></textarea>
@@ -176,9 +246,17 @@
       <li><a href="#services">Learn more</a></li>
       <li><a href="#faq">Learn more</a></li>
     </ul>
-    <!-- ⚠ Icon-only button with no accessible name at all — a screen reader
-         announces it as just "button". Fix: aria-label="Back to top". -->
-    <button class="icon-btn" onclick="window.scrollTo(0,0)">↑</button>
+    <div style="display:flex;gap:8px">
+      <!-- ⚠ Spot the difference 5/7: this button prints the page — that's
+           what it does when activated — but its aria-label says "Menu". A
+           screen reader announces the wrong control entirely. Presence and
+           correctness are different things; axe-core only ever checks that
+           a label exists, never that it matches reality. -->
+      <button class="icon-btn" onclick="window.print()" aria-label="Menu">🖨</button>
+      <!-- ⚠ Icon-only button with no accessible name at all — a screen reader
+           announces it as just "button". Fix: aria-label="Back to top". -->
+      <button class="icon-btn" onclick="window.scrollTo(0,0)">↑</button>
+    </div>
   </div>
 </footer>
 

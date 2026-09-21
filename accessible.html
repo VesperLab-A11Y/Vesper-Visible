@@ -8,24 +8,47 @@
 <title>Loremcorp — Accessible version</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="style.css">
+<style>
+  /* ✓ Spot the difference 7/7 fix: :focus-within opens the same dropdown a
+     keyboard reaches by tabbing to the link inside it, alongside :hover. */
+  .nav-dropdown:hover .nav-submenu, .nav-dropdown:focus-within .nav-submenu { display: block; }
+</style>
 </head>
 <body>
 
-<div class="explainer">
+<div class="explainer" role="region" aria-label="About this demo">
   <div class="wrap">
-    <span><strong>🦇 Vesper Visible</strong> — this is the accessible version of the same page. View source to see what changed, and why.</span>
+    <span><strong>🦇 Vesper Visible</strong>: this is the accessible version of the same page. View source to see what changed, and why.</span>
     <a href="inaccessible.html">Compare with the inaccessible version →</a>
   </div>
 </div>
 
-<!-- ✓ Skip link: hidden until it receives focus, then it's the very first
-     thing a keyboard user tabs to. Jumps straight past the nav to #main. -->
-<a href="#main" style="position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-on);padding:10px 16px;border-radius:0 0 8px 0;font-weight:700;z-index:10" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Skip to main content</a>
+<div class="wrap" style="padding-top:16px">
+  <details class="faq-item">
+    <summary>
+      <span>I ran a scan and got an axe-core error on this page. Why?</span>
+      <svg class="vl-toggle-icon" width="16" height="16" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" focusable="false"><path d="M256,5.333C114.88,5.333,0,117.76,0,256s114.88,250.667,256,250.667S512,394.24,512,256S397.12,5.333,256,5.333z M256,485.333C126.613,485.333,21.333,382.4,21.333,256S126.613,26.667,256,26.667S490.667,129.493,490.667,256 S385.387,485.333,256,485.333z"/><path d="M401.6,178.453c-4.8-3.733-11.52-3.093-15.253,1.493L256,340.373L125.653,179.947c-3.733-4.587-10.453-5.227-15.04-1.493 s-5.227,10.453-1.493,15.04L247.787,364.16c3.733,4.587,10.453,5.227,15.04,1.6c0.533-0.427,1.067-0.96,1.6-1.6l138.667-170.667 C406.827,188.907,406.08,182.187,401.6,178.453z"/></svg>
+    </summary>
+    <div class="faq-body">
+      <p style="margin:8px 0">You probably found the "All page content should be contained by landmarks" (<code>region</code>) flag on the disclaimer line right below the nav. It's real: that line genuinely sits outside every landmark on this page. But look up its details and you'll find it tagged <code>best-practice</code>, not a numbered WCAG success criterion. axe-core ships two kinds of rules side by side, in the same report, with the same red styling: rules that map to a WCAG failure, and rules that check organizational best practices with no direct WCAG mapping. This page passes every WCAG-mapped rule. That one best-practice flag is real, and worth knowing about, but it's not the same thing as an accessibility barrier for an actual person: the text is static, always visible, and equally readable to everyone regardless of which landmark contains it.</p>
+      <p style="margin:8px 0">The lesson generalizes past this one rule: a scanner result is a starting point, not a verdict. Some flags need a fix. Some need five seconds of judgment to confirm they're fine as-is. Knowing which is which is the actual skill, and a scan can't do that part for you.</p>
+    </div>
+  </details>
+</div>
 
 <!-- ✓ A real <nav> with an accessible name: a screen reader can jump
      straight to it, identify it as navigation, and skip past it entirely
-     if it's not what they're looking for right now. -->
-<div class="site-header">
+     if it's not what they're looking for right now. A real <header> around
+     it also gives the brand link its own "banner" landmark, instead of
+     leaving it floating outside every landmark on the page. -->
+<header class="site-header">
+  <!-- ✓ Skip link: hidden until it receives focus, then it's the very first
+       thing a keyboard user tabs to. Jumps straight past the nav to #main.
+       Placing it as the header's first child keeps it the very first tab
+       stop while also giving it a landmark to sit in — axe-core's "region"
+       check otherwise flags a skip link left as a bare child of <body>,
+       even though that placement is a common, WCAG-compliant convention. -->
+  <a href="#main" style="position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-on);padding:10px 16px;border-radius:0 0 8px 0;font-weight:700;z-index:10" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Skip to main content</a>
   <div class="wrap">
     <!-- ✓ The brand mark is a real link: focusable, has an accessible name
          from its text, and Enter activates it — no JS click handler needed. -->
@@ -38,12 +61,34 @@
         <li><a href="#faq">Frequently asked questions</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
+        <!-- ✓ Same dropdown, but :focus-within (in the <style> block above)
+             opens it the moment keyboard focus lands on the link inside it,
+             not just on mouse hover. Nothing here is unreachable anymore. -->
+        <li class="nav-dropdown">
+          <a href="#">Resources</a>
+          <div class="nav-submenu">
+            <a href="#">Guides</a>
+            <a href="#">Case studies</a>
+          </div>
+        </li>
       </ul>
     </nav>
   </div>
-</div>
+</header>
 
-<div class="wrap" id="main">
+<!-- Left outside every landmark on purpose — see "I ran a scan and got an
+     axe-core error, why?" above. axe-core's `region` rule flags this line
+     (tagged `best-practice`, not a WCAG success criterion): it's static,
+     always-visible text, equally readable to everyone regardless of which
+     landmark contains it. A real gap would still be worth fixing; this one
+     isn't, and the point of leaving it here is to have a genuine example
+     to check that judgment against instead of only describing it. -->
+<p style="text-align:center;font-size:.72rem;color:var(--text-faint);margin:14px 0 0">Loremcorp is a fictional company created for this demo. It is not a real business.</p>
+
+<!-- ✓ A real <main>, not just a <div> with a matching id. The skip link
+     and id="main" trick alone don't create a landmark — axe-core's
+     "Document should have one main landmark" check catches exactly this. -->
+<main class="wrap" id="main">
 
   <!-- ✓ A real <h1>, first heading on the page: "jump to heading"
        navigation in a screen reader now has somewhere to start. -->
@@ -54,6 +99,39 @@
          text content, and both Enter and Space activate it natively. -->
     <button type="button" class="btn" onclick="alert('Lorem ipsum!')" style="margin-top:10px">Get Started</button>
   </section>
+
+  <!-- ✓ Spot the difference 3/7 fix: same rotating text, but a Pause button
+       gives control over it (criterion 2.2.2), and the rotation itself
+       respects prefers-reduced-motion instead of always running. -->
+  <div class="ticker">
+    <span class="ticker-item is-active">Featured in Loremcorp Weekly</span>
+    <span class="ticker-item">1,200+ businesses onboarded</span>
+    <span class="ticker-item">Rated 4.8 by our (fictional) clients</span>
+    <div class="ticker-controls">
+      <button type="button" class="ticker-pause-btn" id="ticker-toggle" aria-pressed="false">Pause</button>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var items = document.querySelectorAll('.ticker .ticker-item');
+      var btn = document.getElementById('ticker-toggle');
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var i = 0;
+      var timer = null;
+      function advance() {
+        items[i].classList.remove('is-active');
+        i = (i + 1) % items.length;
+        items[i].classList.add('is-active');
+      }
+      function start() { timer = setInterval(advance, 2200); }
+      function stop() { clearInterval(timer); timer = null; }
+      if (!reduceMotion) start();
+      btn.addEventListener('click', function () {
+        if (timer) { stop(); btn.textContent = 'Play'; btn.setAttribute('aria-pressed', 'true'); }
+        else { start(); btn.textContent = 'Pause'; btn.setAttribute('aria-pressed', 'false'); }
+      });
+    })();
+  </script>
 
   <!-- ✓ Heading levels now step down one at a time: h1 → h2 → h3, a real
        hierarchy instead of a skip. -->
@@ -80,6 +158,14 @@
     </div>
   </section>
 
+  <!-- ✓ Spot the difference 4/7 fix: a real <img> with a real alt, not a
+       CSS background. Turning off images now leaves a visible gap and an
+       announced description, instead of nothing at all. -->
+  <div class="cert-row">
+    <img class="cert-badge-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='58' fill='%23A6CA93'/%3E%3C/svg%3E" alt="Certified Loremcorp Partner seal">
+    <span>Certified Loremcorp Partner since 2019</span>
+  </div>
+
   <section class="testimonial">
     <blockquote>
       <!-- ✓ Same visual spot, a color with a ~7:1 contrast ratio against
@@ -96,11 +182,17 @@
   <section class="faq" id="faq">
     <h2>Frequently asked questions</h2>
     <details class="faq-item">
-      <summary>What is Lorem Ipsum?</summary>
+      <summary>
+        <span>What is Lorem Ipsum?</span>
+        <svg class="vl-toggle-icon" width="16" height="16" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" focusable="false"><path d="M256,5.333C114.88,5.333,0,117.76,0,256s114.88,250.667,256,250.667S512,394.24,512,256S397.12,5.333,256,5.333z M256,485.333C126.613,485.333,21.333,382.4,21.333,256S126.613,26.667,256,26.667S490.667,129.493,490.667,256 S385.387,485.333,256,485.333z"/><path d="M401.6,178.453c-4.8-3.733-11.52-3.093-15.253,1.493L256,340.373L125.653,179.947c-3.733-4.587-10.453-5.227-15.04-1.493 s-5.227,10.453-1.493,15.04L247.787,364.16c3.733,4.587,10.453,5.227,15.04,1.6c0.533-0.427,1.067-0.96,1.6-1.6l138.667-170.667 C406.827,188.907,406.08,182.187,401.6,178.453z"/></svg>
+      </summary>
       <div class="faq-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
     </details>
     <details class="faq-item">
-      <summary>Why do we use it?</summary>
+      <summary>
+        <span>Why do we use it?</span>
+        <svg class="vl-toggle-icon" width="16" height="16" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" focusable="false"><path d="M256,5.333C114.88,5.333,0,117.76,0,256s114.88,250.667,256,250.667S512,394.24,512,256S397.12,5.333,256,5.333z M256,485.333C126.613,485.333,21.333,382.4,21.333,256S126.613,26.667,256,26.667S490.667,129.493,490.667,256 S385.387,485.333,256,485.333z"/><path d="M401.6,178.453c-4.8-3.733-11.52-3.093-15.253,1.493L256,340.373L125.653,179.947c-3.733-4.587-10.453-5.227-15.04-1.493 s-5.227,10.453-1.493,15.04L247.787,364.16c3.733,4.587,10.453,5.227,15.04,1.6c0.533-0.427,1.067-0.96,1.6-1.6l138.667-170.667 C406.827,188.907,406.08,182.187,401.6,178.453z"/></svg>
+      </summary>
       <div class="faq-body">Because it has a more-or-less normal distribution of letters, as opposed to "Content here" text.</div>
     </details>
   </section>
@@ -121,6 +213,13 @@
              focuses the field, and it's announced as the field's name. -->
         <label for="email">Email <span class="required-mark" aria-hidden="true">*</span><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"> (required)</span></label>
         <input type="email" id="email" required aria-required="true">
+      </div>
+      <!-- ✓ Spot the difference 2/7 fix: the same asterisk-plus-hidden-text
+           pattern as Email. Required-ness is now announced and readable,
+           not just implied by a red border. -->
+      <div class="field">
+        <label for="phone">Phone <span class="required-mark" aria-hidden="true">*</span><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"> (required)</span></label>
+        <input type="tel" id="phone" required aria-required="true">
       </div>
       <div class="field">
         <label for="message">Message</label>
@@ -148,7 +247,7 @@
     </div>
   </section>
 
-</div>
+</main>
 
 <footer class="site-footer">
   <div class="wrap">
@@ -156,10 +255,16 @@
       <li><a href="#services">Our services</a></li>
       <li><a href="#faq">Frequently asked questions</a></li>
     </ul>
-    <!-- ✓ aria-label gives this icon-only button an accessible name: a
-         screen reader now announces "Back to top, button" instead of just
-         "button". -->
-    <button class="icon-btn" onclick="window.scrollTo(0,0)" aria-label="Back to top">↑</button>
+    <div style="display:flex;gap:8px">
+      <!-- ✓ Spot the difference 5/7 fix: the aria-label now matches what
+           the button actually does. A screen reader announces "Print this
+           page", the correct name for a control that opens the print dialog. -->
+      <button class="icon-btn" onclick="window.print()" aria-label="Print this page">🖨</button>
+      <!-- ✓ aria-label gives this icon-only button an accessible name: a
+           screen reader now announces "Back to top, button" instead of just
+           "button". -->
+      <button class="icon-btn" onclick="window.scrollTo(0,0)" aria-label="Back to top">↑</button>
+    </div>
   </div>
 </footer>
 
